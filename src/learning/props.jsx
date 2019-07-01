@@ -16,7 +16,7 @@ class Props extends React.Component {
 Props.defaultProps = {
     headerProp: "Header from props...",
     contentProp:"Content from props...",
-    headerSateProp: "Header from  Sate And props...",
-    contentSateProp:"Content from Sate and  props..."
+    headerSateProp: "Header from  State ",
+    contentSateProp:"Content from State "
 }
 export default Props;

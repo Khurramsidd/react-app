@@ -1,5 +1,6 @@
 import React from 'react';
 import Props from './learning/props.jsx'
+import StateAndProps from './learning/stateAndProps.jsx'
 class App extends React.Component {
     render() {
         return (
@@ -7,6 +8,7 @@ class App extends React.Component {
                 <Header/>
                 <Content/>
                 <Props/>
+                <StateAndProps/>
             </div>
         );
     }
