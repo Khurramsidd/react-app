@@ -3,6 +3,7 @@ import Props from './learning/props.jsx'
 import StateAndProps from './learning/stateAndProps.jsx'
 import ValidatingProps from './learning/validatingProps.jsx'
 import SetState from './learning/setState.jsx'
+import ForceUpdate from './learning/forceUpdate.jsx'
 class App extends React.Component {
     render() {
         return (
@@ -13,6 +14,7 @@ class App extends React.Component {
                 <StateAndProps/>
                 <ValidatingProps/>
                 <SetState/>
+                <ForceUpdate/>
             </div>
         );
     }

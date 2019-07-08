@@ -23,6 +23,7 @@ class SetState extends React.Component {
     render() {
         return (
             <div>
+                <h2>Set State</h2>
                 <button onClick = {this.setStateHandler}>SET STATE</button>
                 <h4>State Array: {this.state.data}</h4>
             </div>
