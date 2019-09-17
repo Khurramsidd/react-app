@@ -10,12 +10,12 @@ class Map extends React.Component {
         super(props);
         this.state = {
             mapPosition: {
-                lat: this.props.center.lat,
-                lng: this.props.center.lng
+                lat: this.props.location.lat,
+                lng: this.props.location.lng
             },
             markerPosition: {
-                lat: this.props.center.lat,
-                lng: this.props.center.lng
+                lat: this.props.location.lat,
+                lng: this.props.location.lng
             },
             googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + this.props.apiKey + "&libraries=places"
 
@@ -42,7 +42,7 @@ class Map extends React.Component {
                     address: (address) ? address : '',
                     area: (area) ? area : '',
                     city: (city) ? city : '',
-                    state: (state) ? state : '',
+                    state: (state) ? state : ''
                 })
             },
             error => {
@@ -60,14 +60,14 @@ class Map extends React.Component {
      */
     shouldComponentUpdate(nextProps, nextState) {
         if (
-            this.state.markerPosition.lat !== this.props.center.lat ||
+            this.state.markerPosition.lat !== this.props.location.lat ||
             this.props.location.address !== nextState.address ||
             this.props.location.city !== nextState.city ||
             this.props.location.area !== nextState.area ||
             this.props.location.state !== nextState.state
         ) {
             return true
-        } else if (this.props.center.lat === nextProps.center.lat) {
+        } else if (this.props.location.lat === nextProps.location.lat) {
             return false
         }
     }
@@ -263,7 +263,7 @@ class Map extends React.Component {
             )
         );
         let map;
-        if (this.props.center.lat !== undefined) {
+        if (this.props.location.lat !== undefined) {
             map = <div>
                 <AsyncMap
                     googleMapURL={this.state.googleMapURL}

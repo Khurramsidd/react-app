@@ -5,13 +5,14 @@ class AddressForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            address: '',
-            city: '',
-            area: '',
-            state: '',
-            lat: '',
-            lng: ''
-
+            locationObj:{
+                street_address: '',
+                city: '',
+                area: '',
+                state: '',
+                lat: 33.5701204,
+                lng: 73.1298308
+            }
         }
     }
 
@@ -20,8 +21,11 @@ class AddressForm extends React.Component {
      * @param event
      */
     onStateChange = (stateChange) => {
-        console.log('onStateChange')
-        this.setState(stateChange);
+        console.log('stateChange', stateChange)
+        this.setState(prevState => ({
+            ...prevState,
+            locationObj: Object.assign(this.state.locationObj, stateChange)
+        }));
     };
 
     render() {
@@ -32,34 +36,43 @@ class AddressForm extends React.Component {
                         <label htmlFor="">City</label>
                         <input type="text" name="city" className="form-control" onChange={this.onChange}
                                readOnly="readOnly"
-                               value={this.state.city}/>
+                               value={this.state.locationObj.city}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Area</label>
                         <input type="text" name="area" className="form-control" onChange={this.onChange}
                                readOnly="readOnly"
-                               value={this.state.area}/>
+                               value={this.state.locationObj.area}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="">State</label>
                         <input type="text" name="state" className="form-control" onChange={this.onChange}
-                               readOnly="readOnly" value={this.state.state}/>
+                               readOnly="readOnly" value={this.state.locationObj.state}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Address</label>
                         <input type="text" name="address" className="form-control" onChange={this.onChange}
-                               readOnly="readOnly" value={this.state.address}/>
+                               readOnly="readOnly" value={this.state.locationObj.address}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="">lat</label>
+                        <input type="text" name="lat" className="form-control" onChange={this.onChange}
+                               readOnly="readOnly" value={this.state.locationObj.lat}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="">lng</label>
+                        <input type="text" name="lng" className="form-control" onChange={this.onChange}
+                               readOnly="readOnly" value={this.state.locationObj.lng}/>
                     </div>
                 </div>
                 <div>
 
                     <Map
                         google={this.props.google}
-                        center={{lat: 33.5701204, lng: 73.1298308}}
                         apiKey="AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0"
                         height='500px'
                         zoom={15}
-                        location={this.state}
+                        location={this.state.locationObj}
                         onStateChange={this.onStateChange}
                     />
                 </div>
