@@ -21,7 +21,6 @@ class AddressForm extends React.Component {
      * @param event
      */
     onStateChange = (stateChange) => {
-        console.log('stateChange', stateChange)
         this.setState(prevState => ({
             ...prevState,
             locationObj: Object.assign(this.state.locationObj, stateChange)

@@ -36,7 +36,6 @@ class Map extends React.Component {
                     area = this.getArea(addressArray),
                     state = this.getState(addressArray);
 
-                console.log('city', city, area, state);
 
                 this.props.onStateChange({
                     address: (address) ? address : '',
@@ -124,14 +123,6 @@ class Map extends React.Component {
         }
     };
     /**
-     * And function for city,state and address input
-     * @param event
-     */
-    onChange = (event) => {
-        console.log('onChange')
-        this.setState({[event.target.name]: event.target.value});
-    };
-    /**
      * This Event triggers when the marker window is closed
      *
      * @param event
@@ -143,33 +134,35 @@ class Map extends React.Component {
      * @param place
      */
     onPlaceSelected = (place) => {
-        const address = place.formatted_address,
-            addressArray = place.address_components,
-            city = this.getCity(addressArray),
-            area = this.getArea(addressArray),
-            state = this.getState(addressArray),
-            latValue = place.geometry.location.lat(),
-            lngValue = place.geometry.location.lng();
+        if (place.place_id) {
+            const address = place.formatted_address,
+                addressArray = place.address_components,
+                city = this.getCity(addressArray),
+                area = this.getArea(addressArray),
+                state = this.getState(addressArray),
+                latValue = place.geometry.location.lat(),
+                lngValue = place.geometry.location.lng();
 // Set these values in the state.
-        this.setState({
-            markerPosition: {
-                lat: latValue,
-                lng: lngValue
-            },
-            mapPosition: {
-                lat: latValue,
-                lng: lngValue
-            },
-        }, () => {
-            this.props.onStateChange({
-                address: (address) ? address : '',
-                area: (area) ? area : '',
-                city: (city) ? city : '',
-                state: (state) ? state : '',
-                lat: latValue,
-                lng: lngValue
+            this.setState({
+                markerPosition: {
+                    lat: latValue,
+                    lng: lngValue
+                },
+                mapPosition: {
+                    lat: latValue,
+                    lng: lngValue
+                },
+            }, () => {
+                this.props.onStateChange({
+                    address: (address) ? address : '',
+                    area: (area) ? area : '',
+                    city: (city) ? city : '',
+                    state: (state) ? state : '',
+                    lat: latValue,
+                    lng: lngValue
+                })
             })
-        })
+        }
     };
     /**
      * When the marker is dragged you get the lat and long using the functions available from event object.
@@ -184,8 +177,6 @@ class Map extends React.Component {
 
         Geocode.fromLatLng(newLat, newLng).then(
             response => {
-                console.log('addressArray', response.results[0].address_components);
-
                 const address = response.results[0].formatted_address,
                     addressArray = response.results[0].address_components,
                     city = this.getCity(addressArray),
