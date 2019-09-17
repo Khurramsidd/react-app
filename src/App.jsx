@@ -4,6 +4,7 @@ import StateAndProps from './learning/stateAndProps.jsx'
 import ValidatingProps from './learning/validatingProps.jsx'
 import SetState from './learning/setState.jsx'
 import ForceUpdate from './learning/forceUpdate.jsx'
+import Map from './learning/map.jsx'
 class App extends React.Component {
     render() {
         return (
@@ -15,6 +16,13 @@ class App extends React.Component {
                 <ValidatingProps/>
                 <SetState/>
                 <ForceUpdate/>
+                <Map
+                    google={this.props.google}
+                    center={{lat: 33.5701204, lng: 73.1298308}}
+                    apiKey = "AIzaSyAYOSagGu0Cov4nDXACNHsbroj-a6xBlvw"
+                    height='300px'
+                    zoom={15}
+                />
             </div>
         );
     }
