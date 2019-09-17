@@ -19,7 +19,7 @@ class App extends React.Component {
                 <Map
                     google={this.props.google}
                     center={{lat: 33.5701204, lng: 73.1298308}}
-                    apiKey = "AIzaSyAYOSagGu0Cov4nDXACNHsbroj-a6xBlvw"
+                    apiKey = "AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0"
                     height='300px'
                     zoom={15}
                 />
