@@ -34,6 +34,7 @@ class Map extends React.Component {
                     addressArray = response.results[0].address_components,
                     city = this.getCity(addressArray),
                     area = this.getArea(addressArray),
+                    country = this.getCountry(addressArray),
                     state = this.getState(addressArray);
 
 
@@ -41,7 +42,8 @@ class Map extends React.Component {
                     address: (address) ? address : '',
                     area: (area) ? area : '',
                     city: (city) ? city : '',
-                    state: (state) ? state : ''
+                    state: (state) ? state : '',
+                    country: (country) ? country : ''
                 })
             },
             error => {
@@ -113,14 +115,22 @@ class Map extends React.Component {
      */
     getState = (addressArray) => {
         let state = '';
-        for (let i = 0; i < addressArray.length; i++) {
             for (let i = 0; i < addressArray.length; i++) {
                 if (addressArray[i].types[0] && 'administrative_area_level_1' === addressArray[i].types[0]) {
                     state = addressArray[i].long_name;
                     return state;
                 }
-            }
         }
+    };
+    getCountry = (addressArray) => {
+        let country = '';
+            for (let i = 0; i < addressArray.length; i++) {
+                if (addressArray[i].types[0] && 'country' === addressArray[i].types[0]) {
+                    country = addressArray[i].long_name;
+                    return country;
+                }
+            }
+
     };
     /**
      * This Event triggers when the marker window is closed
@@ -140,6 +150,7 @@ class Map extends React.Component {
                 city = this.getCity(addressArray),
                 area = this.getArea(addressArray),
                 state = this.getState(addressArray),
+                country = this.getCountry(addressArray),
                 latValue = place.geometry.location.lat(),
                 lngValue = place.geometry.location.lng();
 // Set these values in the state.
@@ -158,6 +169,7 @@ class Map extends React.Component {
                     area: (area) ? area : '',
                     city: (city) ? city : '',
                     state: (state) ? state : '',
+                    country: (country) ? country : '',
                     lat: latValue,
                     lng: lngValue
                 })
@@ -182,6 +194,7 @@ class Map extends React.Component {
                     city = this.getCity(addressArray),
                     area = this.getArea(addressArray),
                     state = this.getState(addressArray),
+                    country = this.getCountry(addressArray),
                     latValue = newLat,
                     lngValue = newLng;
                 this.setState({
@@ -199,6 +212,7 @@ class Map extends React.Component {
                         area: (area) ? area : '',
                         city: (city) ? city : '',
                         state: (state) ? state : '',
+                        country: (country) ? country : '',
                         lat: latValue,
                         lng: lngValue
                     })

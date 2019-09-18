@@ -5,13 +5,14 @@ class AddressForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationObj:{
+            locationObj: {
                 street_address: '',
                 city: '',
                 area: '',
                 state: '',
-                lat: 33.5701204,
-                lng: 73.1298308
+                country: '',
+                lat: 33.61770250930633,
+                lng: 73.16674933454055
             }
         }
     }
@@ -47,6 +48,11 @@ class AddressForm extends React.Component {
                         <label htmlFor="">State</label>
                         <input type="text" name="state" className="form-control" onChange={this.onChange}
                                readOnly="readOnly" value={this.state.locationObj.state}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="">Country</label>
+                        <input type="text" name="country" className="form-control" onChange={this.onChange}
+                               readOnly="readOnly" value={this.state.locationObj.country}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Address</label>
