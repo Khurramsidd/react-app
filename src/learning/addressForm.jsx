@@ -1,12 +1,15 @@
 import React from 'react'
 import Map from './map.jsx'
+import 'react-dropzone-uploader/dist/styles.css'
+import Dropzone from 'react-dropzone-uploader';
+
 
 class AddressForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             locationObj: {
-                street_address: '',
+                address: '',
                 city: '',
                 area: '',
                 state: '',
@@ -27,6 +30,19 @@ class AddressForm extends React.Component {
             locationObj: Object.assign(this.state.locationObj, stateChange)
         }));
     };
+
+    // specify upload params and url for your files
+    getUploadParams = ({meta}) => {
+        return {url: 'https://httpbin.org/post'}
+    }
+    // called every time a file's `status` changes
+    handleChangeStatus = ({meta, file}, status) => {
+        console.log('handleChangeStatus', status, meta, file)
+    }
+    // receives array of files that are done uploading when submit button is clicked
+    handleSubmit = (files) => {
+        console.log('meta', files.map(f => f.meta))
+    }
 
     render() {
         return (
@@ -68,6 +84,16 @@ class AddressForm extends React.Component {
                         <label htmlFor="">lng</label>
                         <input type="text" name="lng" className="form-control" onChange={this.onChange}
                                readOnly="readOnly" value={this.state.locationObj.lng}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="">file</label>
+                        <Dropzone
+                            getUploadParams={this.getUploadParams}
+                            onChangeStatus={this.handleChangeStatus}
+                            onSubmit={this.handleSubmit}
+                            accept="image/*,audio/*,video/*"
+                        />
+
                     </div>
                 </div>
                 <div>
